@@ -24,4 +24,4 @@ jobs:
         uses: actions/upload-artifact@master
         with:
            name: Depcheck report
-           path: ${{github.workspace}}/reports
+           path: dependency-check-report.xml/reports
