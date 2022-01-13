@@ -33,13 +33,7 @@ jobs:
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Java CI
-
-on: [push]
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
+name: gradle build
 
     steps:
       - uses: actions/checkout@v2
