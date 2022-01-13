@@ -30,14 +30,14 @@ jobs:
       with:
         arguments: build
 
-  name: gitleaks
+    - name: gitleaks
 
-on: [push, pull_request, workflow_dispatch]
+      on: [push, pull_request, workflow_dispatch]
 
-jobs:
-  gitleaks:
-    runs-on: ubuntu-latest
-    steps:
+      jobs:
+       gitleaks:
+       runs-on: ubuntu-latest
+       steps:
       - uses: actions/checkout@v1
       - name: gitleaks-action with defaults
         uses: zricethezav/gitleaks-action@master
