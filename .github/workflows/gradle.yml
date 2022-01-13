@@ -30,15 +30,17 @@ jobs:
       with:
         arguments: build
 
-    - name: Gitleaks Scan
-      uses: eeveebank/github-actions-gitleaks@1.0.1 && gitleaks scan -repo =https://github.com/mani7444/k8s-jenkins-aws.git
-      with:
-        arguments: scan
-   
-     
-      
-      
+    - name: gitleaks
 
+      on: [push,pull_request]
+
+    jobs:
+      gitleaks:
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@v1
+        - name: gitleaks-action
+          uses: zricethezav/gitleaks-action@master
 
 
 
