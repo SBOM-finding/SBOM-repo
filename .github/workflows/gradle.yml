@@ -29,7 +29,7 @@ jobs:
       uses: gradle/gradle-build-action@4137be6a8bf7d7133955359dbd952c0ca73b1021
       with:
         arguments: build
-jobs:
+- jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
