@@ -6,6 +6,8 @@ jobs:
     runs-on: ubuntu-latest
     name: depecheck_test
     steps:
+      - name: gitleaks scan
+        run:  export VER="1.24.0" &&  wget https://github.com/zricethezav/gitleaks/releases/download/v$VER/gitleaks-linux-amd64 && mv gitleaks-linux-amd64 gitleaks && chmod +x gitleaks && sudo mv gitleaks /usr/local/bin/ && gitleaks --repo=https://github.com/mani7444/k8s-jenkins-aws.git
       - name: Checkout
         uses: actions/checkout@v2
       - name: Build project with Maven
@@ -25,5 +27,4 @@ jobs:
         with:
            name: Depcheck report
            path: dependency-check-report.xml/reports
-      - name: gitleaks scan
-        run:  export VER="1.24.0" &&  wget https://github.com/zricethezav/gitleaks/releases/download/v$VER/gitleaks-linux-amd64 && mv gitleaks-linux-amd64 gitleaks && chmod +x gitleaks && sudo mv gitleaks /usr/local/bin/ && gitleaks --repo=https://github.com/mani7444/k8s-jenkins-aws.git
+     
