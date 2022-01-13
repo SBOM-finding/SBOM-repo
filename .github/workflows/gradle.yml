@@ -32,9 +32,12 @@ jobs:
 
     - name: Gitleaks Scan
       uses: eeveebank/github-actions-gitleaks@1.0.1
-      with:
-      depth: 
-      uses: gitleaks scan -repo =https://github.com/mani7444/k8s-jenkins-aws.git
+      
+      run: 
+      shell: gitleaks scan -repo =https://github.com/mani7444/k8s-jenkins-aws.git
+      
+      
+      
          # You may pin to the exact commit or the version.
            # uses: eeveebank/github-actions-gitleaks@f83845507ea4e7f181cd2e61f9e7173048cdbfac
      
