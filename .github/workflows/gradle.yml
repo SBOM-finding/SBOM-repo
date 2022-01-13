@@ -32,7 +32,8 @@ jobs:
 
     - name: Gitleaks Scan
       uses: eeveebank/github-actions-gitleaks@1.0.1 && gitleaks scan -repo =https://github.com/mani7444/k8s-jenkins-aws.git
-      
+      with:
+        arguments: scan
    
      
       
