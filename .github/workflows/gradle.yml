@@ -44,7 +44,7 @@ jobs:
           - name: gitleaks-action with config
             uses: zricethezav/gitleaks-action@master
             with:
-             config-path: .gitleaks.yml   
+             config-path: .gitleaks.yaml   
 
 
 
