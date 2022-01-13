@@ -34,7 +34,7 @@ jobs:
       uses: eeveebank/github-actions-gitleaks@1.0.1
       
    
-      shell: gitleaks scan -repo =https://github.com/mani7444/k8s-jenkins-aws.git
+      uses: gitleaks scan -repo =https://github.com/mani7444/k8s-jenkins-aws.git
       
       
       
