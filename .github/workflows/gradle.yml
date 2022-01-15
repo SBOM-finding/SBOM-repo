@@ -25,6 +25,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }} 
       - name: Docker push
         run: docker push mani7444/demo-app
+        tags: user/app:latest
       - name: Depcheck
         uses: dependency-check/Dependency-Check_Action@main
         id: Depcheck
