@@ -36,7 +36,9 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: my-app
           IMAGE_TAG: ${{ github.sha }}
+          echo: Ecr reg = ECR_REGISTRY
         with:
+          echo: ecr repo = $ECR_REPOSITORY
           args: set image deployment/$ECR_REPOSITORY $ECR_REPOSITORY=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
       - name: Depcheck
         uses: dependency-check/Dependency-Check_Action@main
