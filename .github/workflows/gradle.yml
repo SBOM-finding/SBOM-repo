@@ -31,7 +31,7 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1 
       - name: Depcheck
         uses: dependency-check/Dependency-Check_Action@main
-        id: Depcheck
+        id: Depcheck 
         with:
           project: 'test'
           path: '.'
