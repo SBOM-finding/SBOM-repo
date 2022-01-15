@@ -13,7 +13,7 @@ jobs:
       - name: Build project with gradle
         run: ./gradlew build
       - name: semgrep scan
-        run: semgrep --config=auto $(pwd)
+        run: python3 -m pip install semgrep && semgrep --config=auto $(pwd)
       - name: Depcheck
         uses: dependency-check/Dependency-Check_Action@main
         id: Depcheck
