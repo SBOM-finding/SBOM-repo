@@ -27,4 +27,5 @@ jobs:
         with:
            name: Depcheck report
            path: /github/workspace/reports/dependency-check-report.html
-     
+     - name: Docker build
+       run: docker build -t jhooq-docker-demo && docker tag jhooq-docker-demo mani7444/jhooq-docker-demo:jhooq-docker-demo
