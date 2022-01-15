@@ -2,16 +2,14 @@
 on: [push]
 
 jobs:
-    depchecktest:
+  depchecktest:
     runs-on: ubuntu-latest
     name: depecheck_test
     steps:
-      - name: gitleaks scan
-        run:  export VER="1.24.0" &&  wget https://github.com/zricethezav/gitleaks/releases/download/v$VER/gitleaks-linux-amd64 && mv gitleaks-linux-amd64 gitleaks && chmod +x gitleaks && sudo mv gitleaks /usr/local/bin/ && gitleaks --repo=https://github.com/mani7444/k8s-jenkins-aws.git
       - name: Checkout
         uses: actions/checkout@v2
       - name: Build project with Maven
-        run:  ./gradlew build
+        run: mvn clean install
       - name: Depcheck
         uses: dependency-check/Dependency-Check_Action@main
         id: Depcheck
@@ -26,6 +24,4 @@ jobs:
         uses: actions/upload-artifact@master
         with:
            name: Depcheck report
-           path: /github/workspace/reports/dependency-check-report.html
-     - name: Docker build
-       run: docker build -t jhooq-docker-demo && docker tag jhooq-docker-demo mani7444/jhooq-docker-demo:jhooq-docker-demo
+           path: ${{github.workspace}}/reports
