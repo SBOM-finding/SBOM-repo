@@ -24,7 +24,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}     
       - name: Depcheck
-        uses: dependency-check/Dependency-Check_Action@main && eskatos/gradle-command-action@v1
+        uses: actions/checkout@v2 && actions/setup-java@v1 && eskatos/gradle-command-action@v1
         id: Depcheck
         with:
           project: 'test'
@@ -34,8 +34,8 @@ jobs:
             --failOnCVSS 7
             --enableRetired
       - name: Upload Test results
-        uses: actions/upload-artifact@master
+        uses: actions/upload-artifact@v2
         with:
            name: Depcheck report
-           path: /github/workspace/reports/dependency-check-report.html
+           path: ./build/reports/dependency-check-report.html
      
