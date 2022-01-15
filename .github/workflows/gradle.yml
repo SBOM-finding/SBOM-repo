@@ -2,7 +2,7 @@
 on: [push]
 
 jobs:
- depchecktest:
+    depchecktest:
     runs-on: ubuntu-latest
     name: depecheck_test
     steps:
