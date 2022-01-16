@@ -11,11 +11,11 @@ jobs:
         uses: actions/checkout@v2
       - name: Build project with gradle
         run: ./gradlew build
-      - name: semgrep scan
-        run: python3 -m pip install semgrep && semgrep --config=auto $(pwd)
+    #  - name: semgrep scan
+     #   run: python3 -m pip install semgrep && semgrep --config=auto $(pwd)
       - name: Sonarqube scan
         run: actions/checkout@master
-      - uses: sonarsource/sonarqube-scan-action@master
+      - uses: kitabisa/sonarqube-action@v1.1.0
         env:
          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
