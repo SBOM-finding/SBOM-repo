@@ -13,6 +13,20 @@ jobs:
         run: ./gradlew build
       - name: semgrep scan
         run: python3 -m pip install semgrep && semgrep --config=auto $(pwd)
+      - name: Sonarqube scan
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: sonarsource/sonarqube-scan-action@master
+        env:
+         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+       # If you wish to fail your job when the Quality Gate is red, uncomment the
+       # following lines. This would typically be used to fail a deployment.
+       # - uses: sonarsource/sonarqube-quality-gate-action@master
+       # timeout-minutes: 5
+       # env:
+       # SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       - name: docker build
         run: docker build -t jhooq-docker-demo . && docker tag jhooq-docker-demo mani7444/jhooq-docker-demo:jhooq-docker-demo
       - name: Trivy image scan
