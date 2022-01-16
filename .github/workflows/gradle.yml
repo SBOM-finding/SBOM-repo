@@ -17,26 +17,8 @@ jobs:
         run: docker build -t jhooq-docker-demo . && docker tag jhooq-docker-demo mani7444/jhooq-docker-demo:jhooq-docker-demo
       - name: Trivy image scan
         run: wget https://github.com/aquasecurity/trivy/releases/download/v0.18.3/trivy_0.18.3_Linux-64bit.deb && sudo dpkg -i trivy_0.18.3_Linux-64bit.deb && trivy image jhooq-docker-demo
-      - name: Depcheck
-        uses: dependency-check/Dependency-Check_Action@main
-        id: Depcheck 
-        with:
-          project: 'test'
-          path: '.'
-          format: 'HTML'    
-          args: >
-            --failOnCVSS 7
-            --enableRetired
-      - name: Upload Test results
-        uses: actions/upload-artifact@master
-        with:
-           name: Depcheck report 
-           path: ${{github.workspace}}/reports
-name: 'Build & Deploy to EKS'
-on:
-  push:
-    branches:
-      - master
+      - name: 'Build & Deploy to EKS'
+  
 env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -44,7 +26,7 @@ env:
   EKS_REGION: ${{ secrets.EKS_REGION }}
   DOCKER_ID: ${{ secrets.DOCKER_ID }}
   DOCKER_PW: ${{ secrets.DOCKER_PW }}
- jobs:
+ 
     deploy:
     name: Deploy
     runs-on: ubuntu-latest
@@ -93,4 +75,19 @@ env:
       # Verify deployment
       - name: Verify deployment
         run: kubectl get pods       
-     
+      - name: Depcheck
+        uses: dependency-check/Dependency-Check_Action@main
+        id: Depcheck 
+        with:
+          project: 'test'
+          path: '.'
+          format: 'HTML'    
+          args: >
+            --failOnCVSS 7
+            --enableRetired
+      - name: Upload Test results
+        uses: actions/upload-artifact@master
+        with:
+           name: Depcheck report 
+           path: ${{github.workspace}}/reports
+
