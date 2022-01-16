@@ -45,7 +45,7 @@ env:
   EKS_REGION: ${{ secrets.EKS_REGION }}
   DOCKER_ID: ${{ secrets.DOCKER_ID }}
   DOCKER_PW: ${{ secrets.DOCKER_PW }}
-  jobs:
+ jobs:
     deploy:
     name: Deploy
     runs-on: ubuntu-latest
