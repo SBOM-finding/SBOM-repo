@@ -9,8 +9,8 @@ jobs:
         run:  export VER="1.24.0" &&  wget https://github.com/zricethezav/gitleaks/releases/download/v$VER/gitleaks-linux-amd64 && mv gitleaks-linux-amd64 gitleaks && chmod +x gitleaks && sudo mv gitleaks /usr/local/bin/ && gitleaks --repo=https://github.com/mani7444/k8s-jenkins-aws.git
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Build project with gradle
-        run: ./gradlew build
+     # - name: Build project with gradle
+      #  run: ./gradlew build
     #  - name: semgrep scan
      #   run: python3 -m pip install semgrep && semgrep --config=auto $(pwd)
       - uses: actions/checkout@v2
