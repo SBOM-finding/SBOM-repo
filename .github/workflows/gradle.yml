@@ -37,7 +37,7 @@ name: 'Build & Deploy to EKS'
 on:
   push:
     branches:
-      - main
+      - master
 env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -51,14 +51,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
-    steps:
-      # Install Node.js dependencies
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-      - run: npm install
-      - run: npm test
       # Login to Docker registry
       - name: Login to Docker Hub
         uses: docker/login-action@v1
