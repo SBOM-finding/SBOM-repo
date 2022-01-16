@@ -14,7 +14,7 @@ jobs:
       - name: semgrep scan
         run: python3 -m pip install semgrep && semgrep --config=auto $(pwd)
       - name: Sonarqube scan
-        run: actions/checkout@v2
+        run: actions/checkout@master
       - uses: sonarsource/sonarqube-scan-action@master
         env:
          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
