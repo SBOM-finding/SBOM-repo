@@ -5,8 +5,8 @@ jobs:
     runs-on: ubuntu-latest
     name: depecheck_test
     steps:
-      - name: Gitleals scan
-        run:  export VER="1.24.0" &&  wget https://github.com/zricethezav/gitleaks/releases/download/v$VER/gitleaks-linux-amd64 && mv gitleaks-linux-amd64 gitleaks && chmod +x gitleaks && sudo mv gitleaks /usr/local/bin/ && gitleaks --repo=https://github.com/mani7444/k8s-jenkins-aws.git
+  #    - name: Gitleals scan
+   #     run:  export VER="1.24.0" &&  wget https://github.com/zricethezav/gitleaks/releases/download/v$VER/gitleaks-linux-amd64 && mv gitleaks-linux-amd64 gitleaks && chmod +x gitleaks && sudo mv gitleaks /usr/local/bin/ && gitleaks --repo=https://github.com/mani7444/k8s-jenkins-aws.git
       - name: Checkout
         uses: actions/checkout@v2
       - name: Build project with gradle
@@ -31,7 +31,7 @@ jobs:
       - name: Trivy image scan
         run: wget https://github.com/aquasecurity/trivy/releases/download/v0.18.3/trivy_0.18.3_Linux-64bit.deb && sudo dpkg -i trivy_0.18.3_Linux-64bit.deb && trivy image jhooq-docker-demo
       - name: Kubescape
-        run: curl -s https://raw.githubusercontent.com/armosec/kubescape/master/install.sh | /bin/bash && kubescape scan --submit
+        run: curl -s https://raw.githubusercontent.com/armosec/kubescape/master/install.sh | /bin/bash && $ kubescape scan --submit
       - name: Depcheck
         uses: dependency-check/Dependency-Check_Action@main
         id: Depcheck 
