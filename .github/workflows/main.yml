@@ -59,7 +59,7 @@ jobs:
           ECR_REPOSITORY: docker_ecr_demo
           IMAGE_TAG: jhooq-docker-demo
         run: |
-          docker build -f Dockerfile -t <534730500888>.dkr.ecr.us-east-2.amazonaws.com/jhooq-docker-demo
+         # docker build -f Dockerfile -t <534730500888>.dkr.ecr.us-east-2.amazonaws.com/jhooq-docker-demo
           docker push <534730500888>.dkr.ecr.us-east-2.amazonaws.com/jhooq-docker-demo
     #  - name: Trivy image scan
      #   run: wget https://github.com/aquasecurity/trivy/releases/download/v0.18.3/trivy_0.18.3_Linux-64bit.deb && sudo dpkg -i trivy_0.18.3_Linux-64bit.deb && trivy image jhooq-docker-demo
