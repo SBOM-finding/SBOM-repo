@@ -4,8 +4,8 @@ WORKDIR /usr/app
 RUN chmod +x gradlew \
     && ./gradlew --version \
     && ./gradlew build
-FROM openjdk:8-jre-alpine
-COPY --from=build /usr/app/target/*.jar app.jar
+    && cp ./target/learning-spring-boot-0.0.1.jar app.jar
+
 EXPOSE 8080
 
 ENTRYPOINT ["java","-jar","app.jar"]
