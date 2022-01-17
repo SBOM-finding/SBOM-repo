@@ -13,31 +13,31 @@ jobs:
         run: ./gradlew build
     #  - name: semgrep scan
      #   run: python3 -m pip install semgrep && semgrep --config=auto $(pwd)
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - name: Set up JDK 11
-        uses: actions/setup-java@v1
-        with:
-          java-version: 11
-      - name: Cache SonarQube packages
-        uses: actions/cache@v1
-        with:
-          path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
-      - name: Cache Gradle packages
-        uses: actions/cache@v1
-        with:
-          path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
-          restore-keys: ${{ runner.os }}-gradle
-      - name: Build and analyze
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        run: ./gradlew build sonarqube --info
+    #  - uses: actions/checkout@v2
+     #   with:
+      #    fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      #- name: Set up JDK 11
+       # uses: actions/setup-java@v1
+       # with:
+        #  java-version: 11
+      #- name: Cache SonarQube packages
+       # uses: actions/cache@v1
+       # with:
+        #  path: ~/.sonar/cache
+        #  key: ${{ runner.os }}-sonar
+        #  restore-keys: ${{ runner.os }}-sonar
+      #- name: Cache Gradle packages
+       # uses: actions/cache@v1
+       # with:
+        #  path: ~/.gradle/caches
+        #  key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+         # restore-keys: ${{ runner.os }}-gradle
+      #- name: Build and analyze
+      #  env:
+      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+       #   SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        #  SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+       # run: ./gradlew build sonarqube --info
       - name: docker build 
         run: docker build -t jhooq-docker-demo . && docker tag jhooq-docker-demo mani7444/jhooq-docker-demo:jhooq-docker-demo
       - name: Trivy image scan
@@ -77,8 +77,8 @@ jobs:
         uses: kodermax/kubectl-aws-eks@master
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA_STAGING }}
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: my-app
+          ECR_REGISTRY: ${{ steps.login_ecr_outputs_registry }}
+          ECR_REPOSITORY: ecr2eks
           IMAGE_TAG: ${{ github.sha }}
         with:
           args: set image deployment/$ECR_REPOSITORY $ECR_REPOSITORY=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
@@ -88,4 +88,4 @@ jobs:
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         with:
-          args: rollout status deployment/my-app
+          args: rollout status deployment/ecr2eks
