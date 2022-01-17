@@ -54,8 +54,24 @@ jobs:
           args: >
             --failOnCVSS 7
             --enableRetired
-      - name: Upload Test results
-        uses: actions/upload-artifact@master 
-        with:
-             name: Depcheck report 
-             path: ${{github.workspace}}/reports
+     # - name: Upload Test results
+     #  uses: actions/upload-artifact@master 
+     #   with:
+     #        name: Depcheck report 
+     #        path: ${{github.workspace}}/reports
+      - name: Failing step
+        run: exit 1
+      - name: Login to Jira
+        uses: atlassian/gajira-login@master
+        if: failure()
+        env:
+        JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
+        JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
+        JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+      - name: Create Jira issue on job failure
+        uses: atlassian/gajira-create@master
+        if: failure()
+         with:
+           project: GA
+           issuetype: Build
+           summary: Build failed for ${{ github.repository }}
