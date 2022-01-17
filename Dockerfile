@@ -1,8 +1,10 @@
-FROM openjdk:8-jdk-alpine
-ARG JAR_FILE=build/libs/*.jar
-COPY build/lib/* /deployments/lib/app.jar
+FROM openjdk:8-jdk-alpine as build
+COPY . /usr/app
+WORKDIR /usr/app
+RUN chmod +x mvnw \
+    && ./gradlew --version \
+    && ./gradlew build
+COPY /usr/app/target/*.jar app.jar
+EXPOSE 8080
 
-RUN mkdir destination-dir-for-add
-ADD sample.tar.gz /destination-dir-for-add
-
-ENTRYPOINT ["java","-jar","/app.jar"] 
+ENTRYPOINT ["java","-jar","app.jar"]
