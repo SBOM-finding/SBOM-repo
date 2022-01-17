@@ -43,7 +43,7 @@ jobs:
       - run: docker build --tag jhooq-docker-demo .
       - name: Push to ECR
         id: docker_ecr_demo
-        uses: jwalton/gh-ecr-push@v1
+        uses: jwalton/gh-ecr-push@v1 
         with:
            access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
            secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
