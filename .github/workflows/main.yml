@@ -40,8 +40,30 @@ jobs:
        # run: ./gradlew build sonarqube --info
       - name: docker build 
         run: docker build -t jhooq-docker-demo . && docker tag jhooq-docker-demo mani7444/jhooq-docker-demo:jhooq-docker-demo
-      - name: Trivy image scan
-        run: wget https://github.com/aquasecurity/trivy/releases/download/v0.18.3/trivy_0.18.3_Linux-64bit.deb && sudo dpkg -i trivy_0.18.3_Linux-64bit.deb && trivy image jhooq-docker-demo
+      - name: Check out code
+        uses: actions/checkout@v2
+    
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push image to Amazon ECR
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: docker_ecr_demo
+          IMAGE_TAG: jhooq-docker-demo
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+    #  - name: Trivy image scan
+     #   run: wget https://github.com/aquasecurity/trivy/releases/download/v0.18.3/trivy_0.18.3_Linux-64bit.deb && sudo dpkg -i trivy_0.18.3_Linux-64bit.deb && trivy image jhooq-docker-demo
      # - name: Kubescape
      #   run: curl -s https://raw.githubusercontent.com/armosec/kubescape/master/install.sh | /bin/bash && $ kubescape scan --submit
      # - name: Depcheck
@@ -70,7 +92,7 @@ jobs:
           aws-region: us-east-2
     
       - name: Login to Amazon ECR
-        id: login-ecr
+        id:  Login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
       - name: deploy to cluster
