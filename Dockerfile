@@ -1,6 +1,6 @@
 FROM openjdk:8-jdk-alpine as build
-COPY . /usr/app
-WORKDIR /usr/app
+COPY . /project
+WORKDIR /project
 RUN chmod +x gradlew \
     && ./gradlew --version \
     && ./gradlew build
