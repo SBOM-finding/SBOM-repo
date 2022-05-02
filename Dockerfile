@@ -1,11 +1,8 @@
-FROM openjdk:8-jdk-alpine as build
-COPY . /project
-WORKDIR /project
-RUN chmod +x gradlew \
-    && ./gradlew --version \
-    
-    && cp ./target/learning-spring-boot-0.0.1.jar app.jar
+FROM openjdk:8-jdk-alpine
+ARG JAR_FILE=build/libs/*.jar
+COPY ${JAR_FILE} app.jar
 
-EXPOSE 8080
+RUN mkdir destination-dir-for-add
+ADD sample.tar.gz /destination-dir-for-add
 
-ENTRYPOINT ["java","-jar","app.jar"]
+ENTRYPOINT ["java","-jar","/app.jar"]
