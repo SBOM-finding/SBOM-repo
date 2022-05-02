@@ -3,7 +3,7 @@ COPY . /project
 WORKDIR /project
 RUN chmod +x gradlew \
     && ./gradlew --version \
-    && ./gradlew build \
+    
     && cp ./target/learning-spring-boot-0.0.1.jar app.jar
 
 EXPOSE 8080
