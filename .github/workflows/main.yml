@@ -33,6 +33,12 @@ jobs:
           # To enable SAST scanning, add: --sast
           # To enable npm/dotnet non-lock file scanning, add: --package-json / --dotnet-proj
           # For http/https proxy configuration add env vars: HTTP_PROXY/HTTPS_PROXY, CA-CRET (path to CA certificate)
+          
+      - name: Setup pipeline enforcer
+        uses: aquasecurity/pipeline-enforcer-action@main
+        with:
+         aqua-key: ${{ secrets.AQUA_KEY }}
+         aqua-secret: ${{ secrets.AQUA_SECRET }}    
 
        
         
