@@ -14,6 +14,14 @@ jobs:
   
       - name: docker build
         run: docker build -t jhooq-docker-demo . && docker tag jhooq-docker-demo kaleel/actions:jhooq-docker-demo
+        
+      - name: Build
+        run: dotnet build Sample.sln --output buildOutput
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v3.1.0
+        with:
+         path: buildOutput  
      
       - name: Login to DockerHub
         uses: docker/login-action@v1
