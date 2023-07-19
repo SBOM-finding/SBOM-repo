@@ -16,7 +16,7 @@ jobs:
         run: docker build -t jhooq-docker-demo . && docker tag jhooq-docker-demo kaleel/actions:jhooq-docker-demo
         
       - name: Build
-        run: dotnet build Sample.sln --output buildOutput
+        run: gradlew build Sample.jar --output buildOutput
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.0
