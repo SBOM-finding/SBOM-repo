@@ -49,7 +49,7 @@ jobs:
          
       - name: Aqua-Security
         run: export AQUA_KEY=$AQUA_KEY && export AQUA_SECRET=$AQUA_SECRET && export trivyVersion=0.35.0 && export TRIVY_RUN_AS_PLUGIN=aqua && curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b . v${trivyVersion}
-          ./trivy fs --scanners config,vuln,secret . --sast
+          ./trivy fs --scanners config,vuln,secret,--sast
           # To customize which severities to scan for, add the following flag: --severity UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL
           # To enable SAST scanning, add: --sast
           # To enable npm/dotnet non-lock file scanning, add: --package-json / --dotnet-proj
